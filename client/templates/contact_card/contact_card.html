@@ -122,12 +122,14 @@
           </div>
         </div>
         {{#if isOrg}}
-          <div class="row">
-            <div class="col-xs-12">
-              <h2>Organisation Contacts</h2>
-              {{> orgContactList}}
+          {{#unless isEdit}}
+            <div class="row">
+              <div class="col-xs-12">
+                <h2>Organisation Contacts</h2>
+                {{> orgContactList}}
+              </div>
             </div>
-          </div>
+          {{/unless}}
         {{/if}}
 
         {{#if isEdit}}
