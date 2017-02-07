@@ -1,0 +1,5 @@
+td:nth-child(2) { text-align:right; }
+.glyphicon-btn { cursor:pointer; font-size:200%; }
+.glyphicon-btn-sm { font-size:150%; }
+.glyphicon-btn-lg { font-size:350%; }
+.panel-heading { min-height:40px; }

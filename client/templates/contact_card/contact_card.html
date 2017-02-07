@@ -1,0 +1,152 @@
+<template name="contact_card">
+  {{#with selected}}
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <span class="panel-title">{{printName}}</span>
+        <span class="pull-right">
+            <i id="edit-entity" class="glyphicon glyphicon-edit glyphicon-btn glyphicon-btn-sm" ></i>
+            <i id="delete-entity" class="glyphicon glyphicon-remove-circle glyphicon-btn glyphicon-btn-sm" style="color:red;"></i>
+        </span>
+        <div style="overflow: auto;"></div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-3 " align="center"> <img alt="User Pic" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRz8YG85w025vkVa6DNR2_DJt1rj6VY428a_u6tB9HvWAdB5QNO" class="img-circle img-responsive"> </div>
+
+          <div class="col-xs-9">
+            <table class="table table-user-information">
+              <tbody>
+                {{#if isOrg}}
+
+                  <tr>
+                    <td>Company Name:</td>
+                    <td>
+                      {{#if isEdit}}
+                        <input type="text" class="form-control list-group-item edit-box" data-boxid="name" placeholder="company name..." value="{{name}}">
+                      {{else}}
+                        {{name}}
+                      {{/if}}
+                    </td>
+                  </tr>
+                {{else}}
+                  <tr>
+                    <td>First Name:</td>
+                    <td>
+                      {{#if isEdit}}
+                        <input type="text" class="form-control list-group-item edit-box" data-boxid="fname" placeholder="first name..." value="{{fname}}">
+                      {{else}}
+                        {{fname}}
+                      {{/if}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Last Name:</td>
+                    <td>
+                      {{#if isEdit}}
+                        <input type="text" class="form-control list-group-item edit-box" data-boxid="lname" placeholder="last name..." value="{{lname}}">
+                      {{else}}
+                        {{lname}}
+                      {{/if}}
+                    </td>
+                  </tr>
+                {{/if}}
+                <tr>
+                  <td>Email:</td>
+                  <td>
+                    {{#each this.emails}}
+                      {{#if isEdit}}
+                        {{> modifyEmails}}
+                      {{else}}
+                        {{email}}<br>
+                      {{/if}}
+                    {{/each}}
+                    {{#if isEdit}}
+                      <span id="add-email-btn" class="glyphicon glyphicon glyphicon-plus-sign glyphicon-btn" style="color:green;" aria-hidden="true"></span>
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address:</td>
+                  <td>
+                    {{#if isEdit}}
+                      <input type="text" class="form-control list-group-item edit-box" data-boxid="address.line1" placeholder="line 1..." value="{{address.line1}}">
+                      <input type="text" class="form-control list-group-item edit-box" data-boxid="address.line2" placeholder="line 2..." value="{{address.line2}}">
+                      <input type="text" class="form-control list-group-item edit-box" data-boxid="address.line3" placeholder="line 3..." value="{{address.line3}}">
+                      <input type="text" class="form-control list-group-item edit-box" data-boxid="address.line4" placeholder="line 4..." value="{{address.line4}}">
+                    {{else}}
+                      {{address.line1}}<br>
+                      {{address.line2}}<br>
+                      {{address.line3}}<br>
+                      {{address.line4}}<br>
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone:</td>
+                  <td>
+                    {{#each this.phones}}
+                      {{#if isEdit}}
+                        {{> modifyPhones}}
+                      {{else}}
+                        {{number}}<br>
+                      {{/if}}
+                    {{/each}}
+                    {{#if isEdit}}
+                      <span id="add-phone-btn" class="glyphicon glyphicon glyphicon-plus-sign glyphicon-btn" style="color:green;" aria-hidden="true"></span>
+                    {{/if}}
+                  </td>
+                </tr>
+                {{#unless isOrg}}
+                  <tr>
+                    <td>Organization:</td>
+                    <td>
+
+                      {{#if isEdit}}
+              					<select id="selecticize-select" class="demo-default" placeholder="Select an organisation...">
+                          <option value="">Select an organisation...</option>
+                          {{#each organisations}}
+                            <option value="{{_id}}">{{printName}}</option>
+                          {{/each}}
+              					</select>
+                      {{else}}
+                        {{> orgName id=organisation}}
+                      {{/if}}
+                    </td>
+                  </tr>
+                {{/unless}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {{#if isEdit}}
+          <div class="row">
+            <span id="save-btn" class="glyphicon glyphicon-floppy-saved glyphicon-btn glyphicon-btn-lg" style="color:green;float:right;margin-right:20px;" aria-hidden="true"></span>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  {{else}}
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <span class="panel-title">Select a user to edit or create a new one...</span>
+      </div>
+      <div class="panel-body" style="text-align:center;">
+        <span class="glyphicon glyphicon-circle-arrow-left" style="color:#bce8f1;" aria-hidden="true"></span>
+      </div>
+    </div>
+  {{/with}}
+</template>
+
+<template name="orgName">
+  {{name}}
+</template>
+
+<template name="modifyPhones">
+  <input type="text" class="form-control list-group-item phone-edit-box" data-boxid="phones.$.number" placeholder="number..." value="{{number}}">
+  <div id="TrashButton" class="glyphicon glyphicon-remove-sign glyphicon-btn del-phone-btn" data-id="{{id}}" style="color:red;"></div><br>
+</template>
+
+<template name="modifyEmails">
+  <input type="text" class="form-control list-group-item phone-edit-box" data-boxid="emails.$.email" placeholder="email..." value="{{email}}">
+  <div id="TrashButton" class="glyphicon glyphicon-remove-sign glyphicon-btn del-email-btn" data-id="{{id}}" style="color:red;"></div><br>
+</template>

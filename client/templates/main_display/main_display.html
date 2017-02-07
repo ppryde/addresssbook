@@ -1,0 +1,48 @@
+<template name="main_display">
+  <div class="col-xs-4">
+      <ul class="nav nav-tabs list-tabs">
+        <li role="presentation" class="list-tab" data-type="orgs"><a href="#" >Orgs</a></li>
+        <li role="presentation" class="active list-tab" data-type="people"><a href="#" >People</a></li>
+        <li id="add-btn" class="glyphicon glyphicon-plus-sign glyphicon-btn" style="color:green; "></li>
+      </ul>
+
+      <ul class = "list-group" sytle="overflow-y:scroll;overflow-x:hidden;">
+        <div class="input-group">
+          <input type="text" id="search_input" class="form-control list-group-item" placeholder="Search" style="border-radius: 0;" >
+          <span class="input-group-btn">
+            <button class="btn btn-success" style="border-radius: 0;" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+        {{#if isOrg}}
+          {{#each organisations}}
+            {{> contactListItem}}
+          {{/each}}
+        {{else}}
+          {{#each contacts}}
+            {{> contactListItem}}
+          {{/each}}
+        {{/if}}
+      </ul>
+  </div>
+  <div class="col-xs-8">
+    {{#if isOrg}}
+      {{> contact_card type="org"}}
+    {{else}}
+      {{> contact_card type="person"}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="contactListItem">
+  <a href="#" class="list-group-item contact-entity">
+      <span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>
+      <span class="font-weight:bold;">{{printName}}</span>
+      <span class="badge">
+        {{#if hasEmail}}@{{/if}}
+        {{#if hasPhone}}<span style="margin-left:3px;" class="glyphicon glyphicon-earphone"></span>{{/if}}
+        {{#if hasAddress}}<span style="margin-left:3px;" class="glyphicon glyphicon-home"></span>{{/if}}
+      </span>
+  </a>
+</template>

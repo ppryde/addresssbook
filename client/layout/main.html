@@ -1,0 +1,23 @@
+<head>
+  <title>addressbook</title>
+</head>
+
+<body>
+  {{> nav}}
+  <div class="container" >
+    <div class="row-fluid">
+      <div class="span2">
+        <!--Sidebar content-->
+      </div>
+      <div class="col-xs-10 center">
+        {{> main_display}}
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
