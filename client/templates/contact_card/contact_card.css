@@ -1,5 +1,7 @@
-td:nth-child(2) { text-align:right; }
+.table-user-information>tbody>tr>td:nth-child(2) { text-align:right; }
 .glyphicon-btn { cursor:pointer; font-size:200%; }
 .glyphicon-btn-sm { font-size:150%; }
 .glyphicon-btn-lg { font-size:350%; }
 .panel-heading { min-height:40px; }
+.table-user-information>tbody>tr>td:first-child { font-weight:bold; }
+.contacts-table>tbody>tr:nth-child(2n+1) { background-color:whitesmoke; }

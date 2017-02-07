@@ -70,5 +70,8 @@ Template.contactListItem.helpers({
           (this.phones && this.phones.length > 0)||(this.emails && this.emails.length > 0))
         return true;
     return false;
+  },
+  isSelectedStyle: function(){
+    return this._id==selectedEntity.get()?"background-color:whitesmoke;":"";
   }
 });
