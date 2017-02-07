@@ -53,11 +53,15 @@ Template.contact_card.events({
   'click #delete-entity':function(event, template){
     this.deleteEntity();
   },
-  'onkeyup .edit-box, blur .edit-box, onblur .edit-box, keyup .edit-box': function(event, template){
-
+  'onkeyup .edit-box, keyup .edit-box': function(event, template){
     let modType = event.target.dataset.boxid;
     let val = (event.target.value||"").trim();
-    this.updateLocalField(modType, val);
+    this.updateLocalField(modType, val, false);
+  },
+  'blur .edit-box, onblur .edit-box': function(event, template){
+    let modType = event.target.dataset.boxid;
+    let val = (event.target.value||"").trim();
+    this.updateLocalField(modType, val, true);
   },
   'click #save-btn':function(event, template){
     this.checkNames();
@@ -75,7 +79,7 @@ Template.contact_card.events({
     this.addEmail();
   },
   'change #selecticize-select':function(event, template){
-    this.updateLocalField("organisation", event.target.value);
+    this.updateLocalField("organisation", event.target.value, true);
   }
 });
 

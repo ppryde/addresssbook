@@ -16,7 +16,7 @@ export class Entity {
     _.extend(this, doc);
   }
 
-  updateLocalField(field, value){
+  updateLocalField(field, value, forceDb){
     let modification = {};
     //Create a nested field for mongodb update
     _.setNested(modification, field, value, {ensure:true});
@@ -26,9 +26,10 @@ export class Entity {
     if (Object.keys(modification).length<1)
         return;
     //Check contacts changes against our schema to validate inputs
-    this.__proto__.checkWithAlert(modification, this.schema);
-    //Make change to db
+    this.checkWithAlert(modification, this.schema);
     _.merge(this, modification);
+    if (forceDb)
+      this.updateDb();
   }
 
   updateDb(){

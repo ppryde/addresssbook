@@ -5,11 +5,8 @@ import { Org } from '/imports/classes/org';
 import Orgs from '/imports/collections/organisation';
 
 import './main.html';
-ContactClass = Contact;
 searchFilter = new ReactiveVar('');
 selectedEntity = new ReactiveVar(null);
 newDocVar = new ReactiveVar(false);
-OrgClass = Org;
-OrgCollection = Orgs;
 let deep_underscore = require('underscore.nested');
 _.mixin(deep_underscore);
