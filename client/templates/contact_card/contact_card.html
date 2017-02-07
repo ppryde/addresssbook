@@ -11,8 +11,11 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-xs-3 " align="center"> <img alt="User Pic" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRz8YG85w025vkVa6DNR2_DJt1rj6VY428a_u6tB9HvWAdB5QNO" class="img-circle img-responsive"> </div>
-
+          {{#if isOrg}}
+            <div class="col-xs-3 " align="center"> <img alt="User Pic" src="http://simpleicon.com/wp-content/uploads/multy-user.png" class="img-circle img-responsive"> </div>
+          {{else}}
+            <div class="col-xs-3 " align="center"> <img alt="User Pic" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRz8YG85w025vkVa6DNR2_DJt1rj6VY428a_u6tB9HvWAdB5QNO" class="img-circle img-responsive"> </div>
+          {{/if}}
           <div class="col-xs-9">
             <table class="table table-user-information">
               <tbody>
@@ -118,9 +121,19 @@
             </table>
           </div>
         </div>
+        {{#if isOrg}}
+          <div class="row">
+            <div class="col-xs-12">
+              <h2>Organisation Contacts</h2>
+              {{> orgContactList}}
+            </div>
+          </div>
+        {{/if}}
+
         {{#if isEdit}}
           <div class="row">
-            <span id="save-btn" class="glyphicon glyphicon-floppy-saved glyphicon-btn glyphicon-btn-lg" style="color:green;float:right;margin-right:20px;" aria-hidden="true"></span>
+              <span id="save-btn" class="glyphicon glyphicon-floppy-saved glyphicon-btn glyphicon-btn-lg" style="color:green;float:right;margin-right:20px;" aria-hidden="true"></span>
+
           </div>
         {{/if}}
       </div>
@@ -147,6 +160,49 @@
 </template>
 
 <template name="modifyEmails">
-  <input type="text" class="form-control list-group-item phone-edit-box" data-boxid="emails.$.email" placeholder="email..." value="{{email}}">
+  <input type="text" class="form-control list-group-item email-edit-box" data-boxid="emails.$.email" placeholder="email..." value="{{email}}">
   <div id="TrashButton" class="glyphicon glyphicon-remove-sign glyphicon-btn del-email-btn" data-id="{{id}}" style="color:red;"></div><br>
+</template>
+
+<template name="orgContactList">
+  <table class="table contacts-table ">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each contacts}}
+        {{> tableRowContact}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="tableRowContact">
+  <tr style="cursor:pointer;">
+    <td>{{fname}}</td>
+    <td style="text-align:left;">{{lname}}</td>
+    {{#if isExpanded}}
+      <td>
+        {{#each emails}}
+          {{email}}<br>
+        {{/each}}
+      </td>
+    {{else}}
+      <td>{{emails.[0].email}}</td>
+    {{/if}}
+    {{#if isExpanded}}
+      <td>
+        {{#each phones}}
+          {{number}}<br>
+        {{/each}}
+      </td>
+    {{else}}
+      <td>{{phones.[0].number}}</td>
+    {{/if}}
+  </tr>
 </template>

@@ -1,3 +1,5 @@
 node_modules/
-mups.json
-*mups.json
+mup.json
+*mup.json
+mup.js
+*mup.js

@@ -37,12 +37,18 @@
 
 <template name="contactListItem">
   <a href="#" class="list-group-item contact-entity">
+      {{#if type="org"}}
       <span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>
+      {{else}}
+      <i class="fa fa-users" aria-hidden="true"></i>
+      {{/if}}
       <span class="font-weight:bold;">{{printName}}</span>
-      <span class="badge">
-        {{#if hasEmail}}@{{/if}}
-        {{#if hasPhone}}<span style="margin-left:3px;" class="glyphicon glyphicon-earphone"></span>{{/if}}
-        {{#if hasAddress}}<span style="margin-left:3px;" class="glyphicon glyphicon-home"></span>{{/if}}
-      </span>
+      {{#if hasAny}}
+        <span class="badge">
+          {{#if hasEmail}}@{{/if}}
+          {{#if hasPhone}}<span style="margin-left:3px;" class="glyphicon glyphicon-earphone"></span>{{/if}}
+          {{#if hasAddress}}<span style="margin-left:3px;" class="glyphicon glyphicon-home"></span>{{/if}}
+        </span>
+      {{/if}}
   </a>
 </template>

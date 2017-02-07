@@ -17,18 +17,6 @@ Template.main_display.helpers({
     let filter = searchFilter.get();
     return (!filter||(filter==""))?Orgs.find({}):Orgs.find({name:{$regex:new RegExp(filter, "i")}});
   },
-  hasEmail: function(){
-    if (this.emails && this.emails.length > 0)
-      return true;
-  },
-  hasPhone: function(){
-    if (this.phones && this.phones.length > 0)
-      return true;
-  },
-  hasAddress: function(){
-    if (this.address && (this.address.line1 || this.address.line2 || this.address.line3 || this.address.line4))
-      return true;
-  },
   isOrg: function(){
     return Template.instance().selectedTab.get()=="orgs";
   }
@@ -58,5 +46,29 @@ Template.main_display.events({
       newDocVar.set(true);
       selectedEntity.set(nu._id);
     }
+  }
+});
+
+Template.contactListItem.helpers({
+  hasEmail: function(){
+    if (this.emails && this.emails.length > 0)
+      return true;
+    return false;
+  },
+  hasPhone: function(){
+    if (this.phones && this.phones.length > 0)
+      return true;
+    return false;
+  },
+  hasAddress: function(){
+    if (this.address && (this.address.line1 || this.address.line2 || this.address.line3 || this.address.line4))
+      return true;
+    return false;
+  },
+  hasAny:function(){
+    if ((this.address && (this.address.line1 || this.address.line2 || this.address.line3 || this.address.line4))||
+          (this.phones && this.phones.length > 0)||(this.emails && this.emails.length > 0))
+        return true;
+    return false;
   }
 });
